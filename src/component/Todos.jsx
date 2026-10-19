@@ -55,6 +55,18 @@ export default function Todos() {
     setTodos(newTodos);
   };
 
+
+   const editTodoTitleHandller = (todo , newTitleValue) => {
+    let newTodos = todos.map((todoItem) => {
+      if (todo.id == todoItem.id) {
+        todoItem.title = newTitleValue;
+      }
+
+      return todoItem;
+    });
+    setTodos(newTodos);
+  };
+
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="w-full px-4 py-8 mx-auto shadow lg:w-1/3  bg-white">
@@ -78,6 +90,7 @@ export default function Todos() {
           todos={todos}
           deleteTodo={deleteTodo}
           toggleTodo={toggleTodoStatusHandller}
+          editTodoTitle={editTodoTitleHandller}
         ></TodoList>
       </div>
     </div>

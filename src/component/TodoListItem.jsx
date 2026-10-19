@@ -2,8 +2,16 @@ import { useState } from "react";
 import DeleteIcon from "./icons/DeleteIcon";
 import EditIcon from "./icons/EditIcon";
 
-export default function TodoListItem({ todo, deleteTodo, toggleTodo }) {
+export default function TodoListItem({ todo, deleteTodo, toggleTodo, toggleTodoStatus , editTodoTitle }) {
   const [editMode, setEditMode] = useState(false);
+
+  const editTodoHandler = () => {
+    if( event.key == 'Enter') {
+      editTodoTitle(todo , event.target.value)
+      setEditMode(false);
+    }
+  }
+
 
   return (
     <li className="relative flex items-center justify-between px-2 py-6 border-b">
@@ -11,7 +19,8 @@ export default function TodoListItem({ todo, deleteTodo, toggleTodo }) {
         <div className="w-full flex item-center">
           <input
             type="text"
-            value={todo?.title}
+            defaultValue={todo?.title}
+            onKeyDown={editTodoHandler}
             onChange={() => {}}
             className="w-full px-4 py-2 border border-gray-400"
           />

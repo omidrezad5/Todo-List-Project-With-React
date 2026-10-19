@@ -38,6 +38,7 @@ export default function Main() {
     }, 3000);
   };
 
+
   if (!auth) {
     return (
       <div className="p-4">
