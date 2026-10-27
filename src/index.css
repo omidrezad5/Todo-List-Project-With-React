@@ -1,35 +1,65 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap");
 @import "tailwindcss";
 
-/* ---------- Design tokens ---------- */
+/* ==========================================================
+   Theme tokens — every color is light-dark(LIGHT, DARK)
+   Default: follows the system setting.
+   Force a theme:  <html data-theme="dark"> or "light"
+   ========================================================== */
 :root {
-  --bg: #07060d;
-  --bg-elev: #0e0c18;
-  --surface: rgba(255, 255, 255, 0.04);
-  --surface-hover: rgba(255, 255, 255, 0.07);
+  color-scheme: light dark;
 
-  --text: #a3a3b8;
-  --text-h: #f5f5fa;
-  --border: rgba(255, 255, 255, 0.09);
-  --border-strong: rgba(255, 255, 255, 0.18);
-  --code-bg: rgba(255, 255, 255, 0.06);
+  --bg: light-dark(#f6f5fb, #07060d);
+  --bg-elev: light-dark(#ffffff, #0e0c18);
+  --surface: light-dark(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.04));
+  --surface-hover: light-dark(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.07));
 
-  --accent: #8b5cf6;
-  --accent-2: #22d3ee;
-  --accent-3: #f472b6;
-  --accent-bg: rgba(139, 92, 246, 0.14);
-  --accent-border: rgba(139, 92, 246, 0.55);
-  --social-bg: rgba(255, 255, 255, 0.05);
-  --gradient: linear-gradient(120deg, #8b5cf6, #22d3ee 55%, #f472b6);
+  --text: light-dark(#5b5870, #a3a3b8);
+  --text-h: light-dark(#14121f, #f5f5fa);
+  --border: light-dark(rgba(20, 18, 31, 0.1), rgba(255, 255, 255, 0.09));
+  --border-strong: light-dark(rgba(20, 18, 31, 0.18), rgba(255, 255, 255, 0.18));
+  --code-bg: light-dark(rgba(124, 58, 237, 0.08), rgba(255, 255, 255, 0.06));
+  --code-text: light-dark(#6d28d9, #c4b5fd);
+
+  --accent: light-dark(#7c3aed, #8b5cf6);
+  --accent-2: light-dark(#0891b2, #22d3ee);
+  --accent-3: light-dark(#db2777, #f472b6);
+  --accent-bg: light-dark(rgba(124, 58, 237, 0.1), rgba(139, 92, 246, 0.14));
+  --accent-border: light-dark(rgba(124, 58, 237, 0.4), rgba(139, 92, 246, 0.55));
+  --social-bg: light-dark(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.05));
+  --gradient: linear-gradient(120deg, var(--accent), var(--accent-2) 55%, var(--accent-3));
+
+  --shadow-color: light-dark(rgba(124, 58, 237, 0.3), rgba(139, 92, 246, 0.55));
   --shadow:
-    0 12px 32px -12px rgba(139, 92, 246, 0.55), 0 4px 12px -4px rgba(0, 0, 0, 0.5);
+    0 12px 32px -12px var(--shadow-color),
+    0 4px 12px -4px light-dark(rgba(20, 18, 31, 0.12), rgba(0, 0, 0, 0.5));
+
+  /* background + panel */
+  --aurora-1: light-dark(rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.28));
+  --aurora-2: light-dark(rgba(34, 211, 238, 0.18), rgba(34, 211, 238, 0.18));
+  --aurora-3: light-dark(rgba(244, 114, 182, 0.16), rgba(244, 114, 182, 0.16));
+  --grid-line: light-dark(rgba(20, 18, 31, 0.05), rgba(255, 255, 255, 0.035));
+  --panel-top: light-dark(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.055));
+  --panel-bottom: light-dark(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.015));
+  --panel-shadow:
+    0 40px 90px -40px light-dark(rgba(70, 40, 140, 0.35), rgba(0, 0, 0, 0.9)),
+    inset 0 1px 0 light-dark(#fff, rgba(255, 255, 255, 0.07));
+
+  /* heading gradient + hero + card tints */
+  --h1-a: light-dark(#14121f, #ffffff);
+  --h1-b: light-dark(#7c3aed, #c4b5fd);
+  --h1-c: light-dark(#0891b2, #67e8f9);
+  --hero-glow: light-dark(rgba(139, 92, 246, 0.38), rgba(139, 92, 246, 0.5));
+  --hero-glow-2: light-dark(rgba(34, 211, 238, 0.2), rgba(34, 211, 238, 0.18));
+  --hero-shadow: light-dark(rgba(124, 58, 237, 0.3), rgba(139, 92, 246, 0.35));
+  --tint-docs: light-dark(rgba(139, 92, 246, 0.12), rgba(139, 92, 246, 0.16));
+  --tint-social: light-dark(rgba(34, 211, 238, 0.14), rgba(34, 211, 238, 0.13));
 
   --sans: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: "Space Grotesk", "Inter", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Consolas, monospace;
 
   font: 17px/160% var(--sans);
-  color-scheme: dark;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -43,14 +73,22 @@
   }
 }
 
+/* Manual override (optional) */
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 /* ---------- Page background: aurora + faint grid ---------- */
 body {
   margin: 0;
   min-height: 100svh;
   background:
-    radial-gradient(60rem 40rem at 15% -10%, rgba(139, 92, 246, 0.28), transparent 60%),
-    radial-gradient(50rem 36rem at 90% 10%, rgba(34, 211, 238, 0.18), transparent 60%),
-    radial-gradient(45rem 30rem at 50% 110%, rgba(244, 114, 182, 0.16), transparent 60%),
+    radial-gradient(60rem 40rem at 15% -10%, var(--aurora-1), transparent 60%),
+    radial-gradient(50rem 36rem at 90% 10%, var(--aurora-2), transparent 60%),
+    radial-gradient(45rem 30rem at 50% 110%, var(--aurora-3), transparent 60%),
     var(--bg);
   background-attachment: fixed;
 }
@@ -62,8 +100,8 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%);
 }
@@ -87,12 +125,10 @@ body::before {
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 28px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
+  background: linear-gradient(180deg, var(--panel-top), var(--panel-bottom));
   backdrop-filter: blur(18px) saturate(140%);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
-  box-shadow:
-    0 40px 90px -40px rgba(0, 0, 0, 0.9),
-    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  box-shadow: var(--panel-shadow);
 
   @media (max-width: 1024px) {
     border-radius: 22px;
@@ -113,7 +149,7 @@ h1 {
   line-height: 1.05;
   letter-spacing: -0.035em;
   margin: 24px 0 8px;
-  background: linear-gradient(120deg, #fff 15%, #c4b5fd 45%, #67e8f9 75%, #fff 100%);
+  background: linear-gradient(120deg, var(--h1-a) 15%, var(--h1-b) 45%, var(--h1-c) 75%, var(--h1-a) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -146,7 +182,7 @@ code {
   font-size: 14px;
   line-height: 135%;
   padding: 3px 9px;
-  color: #c4b5fd;
+  color: var(--code-text);
   background: var(--code-bg);
   border: 1px solid var(--border);
 }
