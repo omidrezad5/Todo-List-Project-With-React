@@ -46,7 +46,11 @@ export default function TodoListItem({ todo, deleteTodo, toggleTodo, toggleTodoS
             className="absolute right-0 flex items-center space-x-1"
           >
             <EditIcon onClick={() => setEditMode(true)}></EditIcon>
-            <DeleteIcon onClick={() => deleteTodo(todo)} />
+            <DeleteIcon onClick={() => {
+              if (window.confirm("آیا مطمئن هستید که می‌خواهید این کار را حذف کنید؟")) {
+                 deleteTodo(todo);
+              }
+              }} />
           </button>
         </div>
       )}
